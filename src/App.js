@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFound/NotFound';
 import ArchivePage from './pages/Archive/Archive';
 import LoginPage from './pages/Login/Login';
 import { ThemeProvider } from 'styled-components';
-import { LightTheme, DarkTheme } from './themes';
+import { LightTheme, DarkTheme, GlobalStyle } from './themes';
 import { ThemeContext } from './context/themeContext';
 
 const App = () => {
@@ -18,22 +18,23 @@ const App = () => {
       <Provider>
         <ThemeContext.Provider value={{ theme, toogleTheme }}>
           <ThemeProvider theme={theme === 'light' ? LightTheme : DarkTheme}>
-            <BrowserRouter>
-                <Switch>
-                  <Route exact path="/">
-                    <HomePage />
-                  </Route>
-                  <Route exact path="/login">
-                    <LoginPage />
-                  </Route>
-                  <Route exact path="/archive">
-                    <ArchivePage />
-                  </Route>
-                  <Route path="*">
-                    <NotFoundPage />
-                  </Route>
-                </Switch>
-            </BrowserRouter>
+            <GlobalStyle />
+              <BrowserRouter>
+                  <Switch>
+                    <Route exact path="/">
+                      <HomePage />
+                    </Route>
+                    <Route exact path="/login">
+                      <LoginPage />
+                    </Route>
+                    <Route exact path="/archive">
+                      <ArchivePage />
+                    </Route>
+                    <Route path="*">
+                      <NotFoundPage />
+                    </Route>
+                  </Switch>
+              </BrowserRouter>
           </ThemeProvider>
         </ThemeContext.Provider>
       </Provider>

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
+import palette from "../../themes/palette";
+
 const HeaderContainer = styled.header`
-    background: ${(props) => props.theme.backgroundColor};
     width: 100%;
     height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: ${(props) => props.theme.color};
+    background-color: ${palette.main};
 `;
 
 export { HeaderContainer };

@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import palette from "../../themes/palette";
 
 const MainContainer = styled.div`
-    background: ${(props) => props.theme.backgroundColor};
     width: 400px;
     height: 300px;
+    background-color: ${palette.main};
 `;
 
 const Form = styled.form`
@@ -16,16 +17,17 @@ const Form = styled.form`
 `;
 
 const Textarea = styled.textarea`
+    background: ${(props) => props.theme.backgroundColor};
     width: 80%;
     height: 60%;
-    color: pink;
-    background: black;
+    color: pink;  
 `;
 
 const Button = styled.button`
     border-radius: 20px;
-    color: pink;
-    background: black;
+    background-color: ${palette.main};
+    background: ${(props) => props.theme.backgroundColor};
+    padding: 8px 16px;
     border: transparent;
 `;
 
