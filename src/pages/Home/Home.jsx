@@ -1,11 +1,14 @@
 import React from 'react';
+
 import Layout from '../../components/Layout/Layout.jsx';
+import NoteCreator from '../../components/NoteCreator/NoteCreator';
+import { MainContainer } from './Home.styles';
 const HomePage = () => {
   return (
     <Layout>
-      <div className="Home-page">
-        home page
-      </div>
+      <MainContainer>
+        <NoteCreator />
+      </MainContainer>
     </Layout>
   );
 }
