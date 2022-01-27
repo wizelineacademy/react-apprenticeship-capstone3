@@ -1,9 +1,12 @@
 import React from 'react';
+import Layout from '../../components/Layout/Layout.jsx';
 const ArchivePage = () => {
   return (
-    <div className="Archive-page">
+    <Layout>
+      <div className="Archive-page">
        archive page
-    </div>
+      </div>
+  </Layout>
   );
 }
 
