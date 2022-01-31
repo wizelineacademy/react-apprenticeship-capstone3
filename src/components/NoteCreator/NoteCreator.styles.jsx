@@ -20,13 +20,14 @@ const Textarea = styled.textarea`
     background: ${(props) => props.theme.backgroundColor};
     width: 80%;
     height: 60%;
-    color: pink;  
+    color: ${palette.darker};  
 `;
 
 const Button = styled.button`
     border-radius: 20px;
     background-color: ${palette.main};
     background: ${(props) => props.theme.backgroundColor};
+    color: ${(props) => props.theme.color};
     padding: 8px 16px;
     border: transparent;
 `;
