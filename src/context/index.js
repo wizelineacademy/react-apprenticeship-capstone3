@@ -2,6 +2,7 @@ import React, { useReducer, createContext } from 'react';
 
 const initialState = {
   archive: [],
+  searched: [],
 };
 
 const Context = createContext();
@@ -10,6 +11,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_NOTES_TO_ARCHIVE':
       return { ...state, ...action.payload };
+      case 'SAVE_SEARCHED_NOTES':
+        return { ...state, ...action.payload };
     default:
       throw new Error('App is having code issues');
   }

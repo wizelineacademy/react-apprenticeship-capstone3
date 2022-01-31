@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useContext } from 'react';
 
 import Layout from '../../components/Layout/Layout.jsx';
 import Note from '../../components/Note/Note';
+import useSearch from '../../utils/hooks/useSearch';
+import { Context } from '../../context';
 const ArchivePage = () => {
-  const [archive, setArchive] = useState([]);
-  useEffect(() => {
-    const archiveData = JSON.parse(localStorage.getItem('archive'))
-    
-    if (archiveData) setArchive(archiveData);
-}, [])
+  const { notes } = useSearch();
+  const { state } = useContext(Context);
+ 
   return (
     <Layout>
       <div className="Archive-page">
       {
-        archive.length !== 0 ? (
-          archive.map(note => (
-            <Note key={note.id} content={note.content} color={note.color} />
-          ))
-        ) : 'there are not Notes saved yet'
+        state.searched.length === 0
+          ? notes.length !== 0 ? (
+            notes.map(note => (
+              <Note key={note.id} content={note.content} color={note.color} />
+            ))
+          ) : 'there are not Notes saved yet'
+          : (
+            state.searched.map(note => (
+              <Note key={note.id} content={note.content} color={note.color} />
+            ))
+          )
       }
       </div>
   </Layout>
