@@ -12,9 +12,7 @@ const useSearch = () => {
     const handleSearch = (e) => {
         e.preventDefault();
         const { value } = e.target;
-        const filterData = notes.filter(search => {
-            if(search.content.includes(value)) return search;
-        });
+        const filterData = notes.filter(search => search.content.includes(value) && search);
         setSearchedNotes(filterData);
 };
 

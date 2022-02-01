@@ -1,11 +1,13 @@
-import React from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react/cjs/react.development';
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+
+import { useHistory } from 'react-router-dom';
 import { auth } from '../../firebase-config';
 const LoginPage = () => {
   const [ createUser, setCreateUser ] = useState(false);
   const [ isUser, setIsUser ] = useState(true);
-  const [user, setuser] = useState({})
+  const history = useHistory();
+  const [user, setUser] = useState({})
   const [registerData, setRegisterData] = useState({
     email: '',
     password: '',
@@ -16,7 +18,8 @@ const LoginPage = () => {
   });
 
   onAuthStateChanged(auth, (currentUser) => {
-    setuser(currentUser);
+    setUser(currentUser);
+    console.log(user);
   });
   const getRegisterInformation = (e, inputType) => {
     const { value } = e.target;
@@ -33,8 +36,9 @@ const LoginPage = () => {
 
   const handleRegister = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, registerData.email, registerData.password );
-      // console.log('user', user);
+      const userRegistered = await createUserWithEmailAndPassword(auth, registerData.email, registerData.password );
+      localStorage.setItem('currentUser', JSON.stringify(userRegistered));
+      history.push('/');
     } catch(error) {
       console.log(error.message);
     }
@@ -42,10 +46,12 @@ const LoginPage = () => {
 
   const handleLogIn = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, registerData.email, registerData.password );
-      // console.log('user', user);
+      const userlogged = await signInWithEmailAndPassword(auth, loginData.email, loginData.password );
+      localStorage.setItem('currentUser', JSON.stringify(userlogged));
+      setUser(userlogged);
+      history.push('/');
     } catch(error) {
-      // console.log(error.message);
+      console.log(error.message);
     }
   };
 

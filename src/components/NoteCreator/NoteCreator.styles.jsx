@@ -18,8 +18,9 @@ const Form = styled.form`
 
 const Textarea = styled.textarea`
     background: ${(props) => props.theme.backgroundColor};
-    width: 80%;
-    height: 60%;
+    margin: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     color: ${palette.darker};  
 `;
 
