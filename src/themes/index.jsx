@@ -17,4 +17,5 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: ${(props) => props.theme.backgroundColor};
     color: ${(props) => props.theme.color};
+    font-family: 'Zen Kaku Gothic Antique', sans-serif !important;
 }`;

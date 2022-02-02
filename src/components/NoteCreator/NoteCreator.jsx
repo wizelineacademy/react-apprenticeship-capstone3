@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import nextId from "react-id-generator";
 
-import { MainContainer, Form, Textarea, Button } from './NoteCreator.styles';
+import { MainContainer, Form, Textarea, Button, ToolsContainer, ColorContainer } from './NoteCreator.styles';
 import { Context } from '../../context';
 
 const NoteCreator = () => {
@@ -52,8 +52,13 @@ const NoteCreator = () => {
                 onChange={(e) => HandleSaveInformation(e,'content')}
                 value={note.content}
             />
-            <input type="color" onChange={(e) => HandleSaveInformation(e,'color')} />
-            <Button type="submit" onClick={handleSaveNote} disabled={disabledButton}>add note</Button>
+            <ToolsContainer>
+                <ColorContainer>
+                    <span>Pick a color:</span>
+                    <input type="color" onChange={(e) => HandleSaveInformation(e,'color')} />
+                </ColorContainer>
+                <Button type="submit" onClick={handleSaveNote} disabled={disabledButton}>add note</Button>
+            </ToolsContainer>
         </Form>
     </MainContainer>
   );

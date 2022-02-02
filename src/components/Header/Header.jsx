@@ -4,15 +4,16 @@ import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 
 import ThemeButton from '../ThemeButton/ThemeButton';
-import { HeaderContainer } from './Header.styles';
+import { HeaderContainer, Title, Icon, TitleContainer, Input, LoginContainer } from './Header.styles';
 import useSearch from '../../utils/hooks/useSearch';
 import { Context } from '../../context';
 import { auth } from '../../firebase-config';
 
 const Header = () => {
-  const { handleSearch, searchedNotes } = useSearch();
+  const { handleSearch, searchedNotes, archiveData } = useSearch();
   const { state, dispatch } = useContext(Context);
-  const user = JSON.parse(localStorage.getItem('currentUser'))
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  // const notes = JSON.parse(localStorage.getItem('archive'))
   const history = useHistory();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Header = () => {
         type: 'SAVE_SEARCHED_NOTES',
         payload: {
             ...state,
+            archive: archiveData,
             searched: searchedNotes,
         },
     });
@@ -32,16 +34,23 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-        <p>title</p>
-        <ThemeButton />
-        <input type="search" placeholder="look for notes" onChange={handleSearch} />
+        <TitleContainer>
+          <Title>keep your notes!</Title>
+          <Icon src='./images/single-pencil.png'/>
+        </TitleContainer>
+
+        <Input type="search" placeholder="look for notes" onChange={handleSearch} />
         {
           user 
           ? (
-              <><p>{user.user.email}</p><button onClick={handleSignOut}>sign out</button></>
+              <LoginContainer>
+                <p>Hello, {user.user.email}!</p>
+                <button onClick={handleSignOut}>sign out</button>
+              </LoginContainer>
             )
           : null
         }
+        <ThemeButton />
     </HeaderContainer>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 
-// import { MainContainer, Form, Textarea, Button } from './NoteCreator.styles';
+import { MainContainer } from './Note.styles';
 
 const Note = ({content, color}) => {
   return (
-    <div style={{ backgroundColor: color, height: '200px', width: '250px' }}>
+    <MainContainer style={{ backgroundColor: color }}>
        {content}
-    </div>
+    </MainContainer>
   );
 }
 export default Note;

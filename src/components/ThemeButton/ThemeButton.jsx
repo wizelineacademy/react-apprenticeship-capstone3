@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { ThemeContext } from '../../context/themeContext';
 
-// import {  } from './ThemeButton.styles';
+import { Button, Icon } from './ThemeButton.styles';
 const ThemeButton = () => {
     const { theme, toogleTheme } = useContext(ThemeContext);
     const handleTheme = () => {
@@ -10,7 +10,13 @@ const ThemeButton = () => {
     };
 
     return (
-    <button onClick={handleTheme}>change theme</button> 
+    <Button onClick={handleTheme}>
+       <Icon
+        alt='theme icon'
+        src={`./images/${theme === 'light' ? 'sun' : 'moon'}.png`}
+      />
+       theme
+    </Button> 
   );
 }
 export default ThemeButton;

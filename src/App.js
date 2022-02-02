@@ -11,7 +11,7 @@ import { LightTheme, DarkTheme, GlobalStyle } from './themes';
 import { ThemeContext } from './context/themeContext';
 
 const App = () => {
-  const [ theme, toogleTheme ] = useState('light');
+  const [ theme, toogleTheme ] = useState('dark');
 
   return (
     <div className="App">

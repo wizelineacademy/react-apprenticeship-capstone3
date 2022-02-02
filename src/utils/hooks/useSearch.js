@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 
 const useSearch = () => {
-    const [notes, setNotes] = useState([]);
+    const archiveData = JSON.parse(localStorage.getItem('archive')) 
+    // const [notes, setNotes] = useState(archiveData);
     const [searchedNotes, setSearchedNotes] = useState([]);
     
-    useEffect(() => {
-        const archiveData = JSON.parse(localStorage.getItem('archive')) 
-        if (archiveData) setNotes(archiveData);
-    }, []);
+    // useEffect(() => {
+    //     if (searchedNotes.length !== 0) setNotes(archiveData);
+    // }, [searchedNotes]);
 
     const handleSearch = (e) => {
         e.preventDefault();
         const { value } = e.target;
-        const filterData = notes.filter(search => search.content.includes(value) && search);
+        const filterData = archiveData.filter(search => search.content.includes(value) && search);
         setSearchedNotes(filterData);
 };
 
-    return { notes, handleSearch, searchedNotes };
+    return { handleSearch, searchedNotes, archiveData };
 
 }
 
