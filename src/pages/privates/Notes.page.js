@@ -10,6 +10,7 @@ const Notes = ({ history }) => {
     return (
         <>
             <AddNote />
+            <div style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
             {
                 !!notes?.length && notes.filter(n => !n.isArchived && (searchTerm != "" ? n.texto.includes(searchTerm): true)).map(
                     (note) =>
@@ -19,6 +20,7 @@ const Notes = ({ history }) => {
             {
                (!notes || !notes.length) && <p>No hay notas para mostrar</p>
             }
+            </div>
         </>
     );
 };
