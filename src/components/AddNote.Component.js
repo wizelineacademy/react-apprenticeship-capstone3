@@ -1,29 +1,34 @@
 import React from "react";
-import styled from "styled-components";
+import { useState } from "react/cjs/react.development";
+import { AddNoteContainer } from "./ComponentsStyledComponents";
 import { useData } from "../context/dataContext";
 
-const AddNoteContainer = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  margin: 10px;
-  padding: 8px;
-  background-color: transparent;
-`
+const AddNote = ({ }) => {
 
-const AddNote = ({}) => {
+  const [text, setText] = useState("");
+  const [color, setColor] = useState("orange");
+  const { setSearchTerm, searchTerm, addNote } = useData();
 
-    const { addNote } = useData();
-
-    const add = () => {
-      addNote();
+  const add = () => {
+    if (text != "") {
+      addNote(text, color);
+      setText("");
     }
+  }
 
-    return (
-        <AddNoteContainer> 
-                <p>Añadir nota</p>
-                <input type={"text"}/>
-                <button onClick={add}>Aceptar</button>
-        </AddNoteContainer>
-    );
+  return (
+    <AddNoteContainer>
+      <p>Buscar</p>
+      <input type={"text"} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+      <p>{"Añadir"} nota</p>
+      <input type={"text"} value={text} onChange={(e) => setText(e.target.value)} />
+      <button onClick={add}>Aceptar</button>
+      <select name="select" value={color} onChange={(e) => setColor(e.target.value)}>
+        <option value="oranje">Naranja</option>
+        <option value="red">Rojo</option>
+        <option value="blue">Azul</option>
+      </select>
+    </AddNoteContainer>
+  );
 };
 export default AddNote;

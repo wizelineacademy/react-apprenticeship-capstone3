@@ -33,14 +33,17 @@ box-sizing: border-box;
 const Login = ({ history }) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
 
     const DoLogin = () => {
         loginByUserAndPass(email, pass).then(
             (user) => {
+                setError(false);
                 navigate("/notes");
             }
         ).catch((error) => {
+            setError(true);
         })
     }
 
@@ -54,6 +57,10 @@ const Login = ({ history }) => {
                     <label>Password : </label>
                     <LogginInput type="password" placeholder="Enter Password" name="password" required equired value={pass} onChange={(e)=> setPass(e.target.value)} />
                     <LogginButton onClick={DoLogin} type="button">Login</LogginButton>
+                    {
+                        !!error &&
+                        <p>Usuario o contraseña incorrecta</p>
+                    }
                 </LoginContainer>
             </form>
         </>

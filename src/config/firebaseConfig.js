@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCOHxYvQ0X2RqciQOXbKJz1hRBXw6ruhh8",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "flutterfacebook-e566f.firebaseapp.com",
   databaseURL: "https://flutterfacebook-e566f.firebaseio.com",
   projectId: "flutterfacebook-e566f",

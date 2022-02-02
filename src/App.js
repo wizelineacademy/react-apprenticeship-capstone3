@@ -5,6 +5,7 @@ import PrivateLayout from './pages/privates/PrivateLayout.component';
 import { AuthProvider } from './context/authContext'
 import Notes from './pages/privates/Notes.page';
 import { DataProvider } from './context/dataContext';
+import Archived from './pages/privates/Archived.page';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/" element={<PrivateLayout />} >
-              <Route index element={<h1>home</h1>} />
+              <Route index element={<Archived/>} />
               <Route path="notes" element={<Notes />} />
             </Route>
           </Routes>

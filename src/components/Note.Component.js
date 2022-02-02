@@ -1,22 +1,29 @@
 import React from "react";
-import styled from "styled-components";
+import { useState } from "react/cjs/react.development";
+import { useData } from "../context/dataContext";
+import { NoteCointainer, NoteOptions, EditNote } from "./ComponentsStyledComponents";
 
-const NoteCointainer = styled.div`
-  height: 200px;
-  width: 235px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  margin: 10px;
-  padding: 8px;
-  background-color: orange;
-  display: inline-flex
-`
+const Note = ({ note }) => {
+    const [editMode, setEditMode] = useState(false);
+    const [newText, setNewText] = useState("");
+    const {edditNote, archiveNote} = useData();
 
-const Note = ({ noteId, text }) => {
+    const saveNote = () =>{
+        setEditMode(false);
+        edditNote(note, newText);
+    }
+
+    const onEditNote = () =>{
+        setNewText(note.texto);
+        setEditMode(true);
+    }
 
     return (
-        <NoteCointainer> 
-                <p>{text}</p>
+        <NoteCointainer color={note.color}> 
+                { !editMode && <p>{note.texto}</p> }
+                { editMode && <EditNote type={"text"} value={newText} onChange={e => setNewText(e.target.value)}></EditNote>}
+                <NoteOptions left={"70"} onClick={() => editMode ? saveNote() : onEditNote()}> {editMode ? "Guardar" : "Editar"}</NoteOptions>
+                <NoteOptions left={"40"} onClick={() => archiveNote(note.id)}>Archivar</NoteOptions>
         </NoteCointainer>
     );
 };
