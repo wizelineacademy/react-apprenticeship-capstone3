@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { useData } from "../../context/dataContext";
 import Note from "../../components/Note.Component"
 import AddNote from "../../components/AddNote.Component"

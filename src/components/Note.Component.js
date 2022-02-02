@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, {useState} from "react";
 import { useData } from "../context/dataContext";
 import { NoteCointainer, NoteOptions, EditNote } from "./ComponentsStyledComponents";
 
