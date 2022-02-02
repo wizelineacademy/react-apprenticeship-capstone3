@@ -21,7 +21,15 @@ export const DataProvider = ({ children }) => {
     ]);
 
     const addNote = (text) => {
-
+        //TODO Add note to firebase
+        let newId = Math.max(notes.map(note => note.id)) + 1;
+        setNotes([
+            ...notes,
+            {
+                texto: "nueva nota",
+                id: newId
+            }
+        ]);
     }
 
     const value = { notes, addNote }

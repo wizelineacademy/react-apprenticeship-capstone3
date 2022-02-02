@@ -6,23 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 const MainContainer = styled.div`
-min-height: 100vh;
+width: 80%;
 font-family: Montserrat, sans-serif;
-`
-
-const SecundaryContainer = styled.section`
-position: absolute;
-    top: 0;
-    transition: all ease-in .5s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+display: inline-block;
+vertical-align: top;
+overflow-y: scroll;
+height:100vh;
 `
 
 const MenuOption = styled.a`
@@ -34,14 +23,16 @@ text-align: center;
 `
 
 const Menu = styled.nav`
-position: fixed;
-left: 0;
-z-index: 50;
-display: flex;
+width: 20%;
+display: inline-flex;
 justify-content: space-around;
 flex-direction: column;
 height: 100vh;
 background: #422C73;
+vertical-align: middle;
+`
+const DIV = styled.div`
+    width: 100%;
 `
 
 const PrivateLayout = ({ children }) => {
@@ -59,10 +50,10 @@ const PrivateLayout = ({ children }) => {
     }
 
     return (
-        false ? <Navigate to="/login" />
+        !isAuthenticated ? <Navigate to="/login" />
             :
             <>
-
+                <DIV>
                 <Menu>
                     <MenuOption onClick={() => navigate("/notes")}>Notas</MenuOption>
                     <MenuOption onClick={() => navigate("/")}>Archivadas</MenuOption>
@@ -70,10 +61,9 @@ const PrivateLayout = ({ children }) => {
                 </Menu>
 
                 <MainContainer>
-                    <SecundaryContainer>
                         <Outlet />
-                    </SecundaryContainer>
                 </MainContainer>
+                </DIV>
 
                 {/*<button type="button" onClick={DoLogOut}>Logout</button>
             <br/>*/}
