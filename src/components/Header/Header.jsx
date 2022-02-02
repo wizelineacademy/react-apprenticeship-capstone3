@@ -28,9 +28,16 @@ const Header = () => {
   }, [searchedNotes]);
 
   const handleSignOut = async () => {
-    await signOut(auth);
+    await signOut(auth).then(function() {
+      localStorage.clear();
+    }).catch(function(error) {
+      console.log(error)
+    });
+
     history.push('/login');
   };
+  
+  const goToLogIn = () => history.push('/login');
 
   return (
     <HeaderContainer>
@@ -48,7 +55,11 @@ const Header = () => {
                 <button onClick={handleSignOut}>sign out</button>
               </LoginContainer>
             )
-          : null
+          : (
+            <LoginContainer>
+              <button onClick={goToLogIn}>Log in</button>
+            </LoginContainer>
+          )
         }
         <ThemeButton />
     </HeaderContainer>

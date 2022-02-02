@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 
+import { Button, Input, Container, Form, Title } from './Login.styles';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../firebase-config';
 const LoginPage = () => {
@@ -56,26 +57,26 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="Login-page" style={{ width: '100%', height: '100vh',  display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+    <Container>
        {
          createUser ? (
-          <form style={{ width: '500px', height: '400px', display: 'flex', flexDirection: 'column'}}>
-            <h2>create a user</h2>
-            <input type='text' placeholder='write a email' onChange={(e) => getRegisterInformation(e, 'email')}/>
-            <input type='password' placeholder='create a password' onChange={(e) => getRegisterInformation(e, 'password')}/>
-            <button type='button' onClick={handleRegister}>Create user</button>
-          </form>
+          <Form>
+            <Title>create a user</Title>
+            <Input type='text' placeholder='write a email' onChange={(e) => getRegisterInformation(e, 'email')}/>
+            <Input type='password' placeholder='create a password' onChange={(e) => getRegisterInformation(e, 'password')}/>
+            <Button type='button' onClick={handleRegister}>Create user</Button>
+          </Form>
          ) : (
-          <form style={{ width: '500px', height: '400px', display: 'flex', flexDirection: 'column'}}>
-            <h2>log in</h2>
-            <input type='text' placeholder='enter your email' onChange={(e) => getRegisterInformation(e, 'email')}/>
-            <input type='password' placeholder='enter your password' onChange={(e) => getRegisterInformation(e, 'password')}/>
-            <button type='button' onClick={handleLogIn}>log in</button>
-            <button type='button' onClick={handleTYpeofForm}>CREATE USER</button>
-          </form>
+          <Form>
+            <Title>log in</Title>
+            <Input type='text' placeholder='enter your email' onChange={(e) => getRegisterInformation(e, 'email')}/>
+            <Input type='password' placeholder='enter your password' onChange={(e) => getRegisterInformation(e, 'password')}/>
+            <Button type='button' onClick={handleLogIn}>log in</Button>
+            <Button type='button' onClick={handleTYpeofForm}>CREATE USER</Button>
+          </Form>
          )
        }
-    </div>
+    </Container>
   );
 }
 
