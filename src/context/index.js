@@ -13,6 +13,8 @@ const reducer = (state, action) => {
       return { ...state, ...action.payload };
       case 'SAVE_SEARCHED_NOTES':
         return { ...state, ...action.payload };
+      case 'DELETE_NOTE':
+          return { ...state, ...action.payload };
     default:
       throw new Error('App is having code issues');
   }

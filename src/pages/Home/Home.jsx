@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -6,18 +7,13 @@ import NoteCreator from '../../components/NoteCreator/NoteCreator';
 import Note from '../../components/Note/Note';
 import { MainContainer, NoteStore, LinkText } from './Home.styles';
 import { Context } from '../../context';
+import useDeleteNote from '../../utils/hooks/useDeleteNote';
 const HomePage = () => {
   const { state } = useContext(Context);
   const [notes, setNotes] = useState([]);
   localStorage.setItem("archive", JSON.stringify(state.archive));
-  
-  // useEffect(() => {
-  //   const notesStoraged = JSON.parse(localStorage.getItem('archive'));
-  //   if(notesStoraged) {
-  //     setNotes(notesStoraged);
-  //     //setNotes(current => [...current, notesStoraged]);
-  //   }
-  // }, [state.archive]);
+  const { handleDeleteNote } = useDeleteNote(notes);
+
   useEffect(() => {
     const notesStoraged = JSON.parse(localStorage.getItem('archive'));
     if(notesStoraged) {
@@ -25,9 +21,10 @@ const HomePage = () => {
     }
   }, [state.archive]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("archive", JSON.stringify(state.archive));
-  // }, [state.archive]);
+  useEffect(() => {
+    setNotes((current) => current = state.searched)
+    if(state.searched.length === 0)  setNotes(notes);
+  }, [state.searched]);
 
   return (
     <Layout>
@@ -38,7 +35,7 @@ const HomePage = () => {
           {
             notes
             ? notes.map(note => (
-              <Note key={note.id} content={note.content} color={note.color}/>
+              <Note key={note.id} content={note.content} color={note.color} handleDeleteNote={() => handleDeleteNote(note.id)}/>
             ))
             : 'no notes yet'
           }

@@ -13,7 +13,7 @@ const Header = () => {
   const { handleSearch, searchedNotes, archiveData } = useSearch();
   const { state, dispatch } = useContext(Context);
   const user = JSON.parse(localStorage.getItem('currentUser'));
-  // const notes = JSON.parse(localStorage.getItem('archive'))
+
   const history = useHistory();
 
   useEffect(() => {

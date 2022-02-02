@@ -7,7 +7,9 @@ const MainContainer = styled.div`
     border-radius: 10px;
     overflow: scroll;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    margin: 16px 0px;
+    justify-content: space-between;
     align-items: center;
     background: lightgray;
     border: solid 1px gray;
@@ -19,4 +21,12 @@ const MainContainer = styled.div`
     }
 `;
 
-export { MainContainer };
+const Delete = styled.img`
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    align-self: end;
+`;
+
+export { MainContainer, Delete };
