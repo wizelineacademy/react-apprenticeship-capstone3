@@ -1,4 +1,5 @@
 ## Description
+
 ```
 < Replace with the PR description >
 
@@ -7,6 +8,7 @@
 - Include the necessary commands to run your application
 - List any dependencies that are required for this change.
 ```
+
 ## Type of Change
 
 ```
@@ -27,30 +29,41 @@ Delete options that are not relevant.
 - [x] Reverts (Reverts a previous commit)
 
 ## How should this be tested?
+
 ```
-Add a brief description of how can be tested this deliverable step by step. 
+Add a brief description of how can be tested this deliverable step by step.
 
 - Describe the tests that you ran to verify your changes.
 - Provide detailed instructions so that the reviewers can easily verify the PR.
 - List any relevant details for your test configuration
 ```
+
 ## Any background context you want to provide?
+
 ```
-Add any information regarding the PR that the reviewers should know, if necessary, for example "This is only a fix PR related the past PR (PR link)" 
+Add any information regarding the PR that the reviewers should know, if necessary, for example "This is only a fix PR related the past PR (PR link)"
 ```
+
 ## What is the deliverable?
+
 ```
-Number of the deliverable and the tittle of this one. 
+Number of the deliverable and the tittle of this one.
 ```
+
 ## Screenshots and links
+
 ```
-Add screenshots of your work if and the link of the url in which the reviewers can take a look at this work 
+Add screenshots of your work if and the link of the url in which the reviewers can take a look at this work
 ```
+
 ## Notes
+
 ```
 Please provide any additional information or any concern you may want to be reviewed more in detail
 ```
+
 ## Checklist
+
 - [ ] I added the necessary documentation, if appropriate.
 - [ ] I added tests to prove that my fix is effective or my deliverable works.
 - [ ] I reviewed existing Pull Requests before submitting mine.
