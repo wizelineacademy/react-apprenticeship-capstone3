@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import nextId from "react-id-generator";
 
 import { MainContainer, Form, Textarea, Button, ToolsContainer, ColorContainer } from './NoteCreator.styles';
-import { Context } from '../../context';
+import { Context, actions } from '../../context';
 
 const NoteCreator = () => {
     const [note, setNote] = useState({
@@ -11,10 +10,8 @@ const NoteCreator = () => {
         color: '',
         id: '',
     });
-    const [noteStore, setNoteStore] = useState([]);
     const [disabledButton, setDisabledButton] = useState(true);
-    const { state, dispatch } = useContext(Context);
-
+    const { dispatch } = useContext(Context);
     const idGenerator = nextId();
 
      const HandleSaveInformation = (event, inputType) => {
@@ -22,25 +19,13 @@ const NoteCreator = () => {
         const { value } = event.target;
         if(inputType === 'content') setNote(current => ({...current, content: value,  id: idGenerator, }));
         if(inputType === 'color') setNote(current => ({...current, color: value }));
-        if(note.content !== '') setDisabledButton(false); 
+        if(note.content !== '') setDisabledButton(false);
     };
     const handleSaveNote = (e) => {
         e.preventDefault();
-        setNoteStore((current) => {
-           return [...current, note];
-        });
-    };
-
-    useEffect(() => {
+        dispatch(actions.addNoteToArchive(note));
         setNote({ content: '', color: '', id: '', });
-        dispatch({
-            type: 'ADD_NOTES_TO_ARCHIVE',
-            payload: {
-                ...state,
-                archive: noteStore,
-            },
-        });
-    }, [noteStore]);
+    };
 
   return (
     <MainContainer>

@@ -2,21 +2,64 @@ import React, { useReducer, createContext } from 'react';
 
 const initialState = {
   archive: [],
-  searched: [],
+  searchText: ''
 };
+const ls =  localStorage.getItem('archive')
+if ( ls ) initialState.archive = JSON.parse(ls)
+
 
 const Context = createContext();
 
+const actions = {
+  addNoteToArchive: (note) => {
+    return {
+        type: 'ADD_NOTE_TO_ARCHIVE',
+        payload: note,
+    }
+  },
+  changeSearchText: (searchText) => {
+    return {
+        type: 'CHANGE_SEARCH_TEXT',
+        payload: searchText,
+    }
+  },
+  deleteNotesOfArchive: (id) => {
+    return {
+        type: 'DELETE_NOTE',
+        payload: id,
+    }
+  }
+}
+
+const saveArchive = (archive) => {
+  localStorage.setItem("archive", JSON.stringify(archive));
+}
 const reducer = (state, action) => {
+  let newState = {
+        ...state
+      }
   switch (action.type) {
-    case 'ADD_NOTES_TO_ARCHIVE':
-      return { ...state, ...action.payload };
-      case 'SAVE_SEARCHED_NOTES':
-        return { ...state, ...action.payload };
-      case 'DELETE_NOTE':
-          return { ...state, ...action.payload };
+    case 'CHANGE_SEARCH_TEXT':
+      newState.searchText = action.payload
+      return newState;
+
+    case 'ADD_NOTE_TO_ARCHIVE':
+      newState.archive.push(action.payload)
+      saveArchive(newState.archive)
+      return newState;
+
+     case 'DELETE_NOTE':
+      const filteredNotes = newState.archive.filter((note) => note.id !== action.payload)
+      newState = {
+        ...state,
+        archive: filteredNotes
+      }
+      saveArchive(newState.archive)
+      return newState;
+  
     default:
-      throw new Error('App is having code issues');
+      return newState
+
   }
 };
 
@@ -26,4 +69,4 @@ const Provider = ({ children }) => {
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
-export { Context, Provider };
+export { Context, Provider, actions };

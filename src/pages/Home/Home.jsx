@@ -11,20 +11,17 @@ import useDeleteNote from '../../utils/hooks/useDeleteNote';
 const HomePage = () => {
   const { state } = useContext(Context);
   const [notes, setNotes] = useState([]);
-  localStorage.setItem("archive", JSON.stringify(state.archive));
-  const { handleDeleteNote } = useDeleteNote(notes);
+  const { handleDeleteNote } = useDeleteNote();
+ 
+  useEffect(() => {
+    setNotes((current) => current = state.archive)
+  },[state.archive]);
 
   useEffect(() => {
-    const notesStoraged = JSON.parse(localStorage.getItem('archive'));
-    if(notesStoraged) {
-      setNotes(notesStoraged);
-    }
-  }, [state.archive]);
-
-  useEffect(() => {
-    setNotes((current) => current = state.searched)
-    if(state.searched.length === 0)  setNotes(notes);
-  }, [state.searched]);
+    if(!state.searchText) setNotes(state.archive)
+    const searchedNotes = state.archive.filter(n => n.content.includes(state.searchText))
+    setNotes(searchedNotes)
+  },[state.searchText]);
 
   return (
     <Layout>
@@ -35,7 +32,12 @@ const HomePage = () => {
           {
             notes
             ? notes.map(note => (
-              <Note key={note.id} content={note.content} color={note.color} handleDeleteNote={() => handleDeleteNote(note.id)}/>
+              <Note
+                key={note.id}
+                content={note.content}
+                color={note.color}
+                handleDeleteNote={() => handleDeleteNote(note.id)}
+              />
             ))
             : 'no notes yet'
           }

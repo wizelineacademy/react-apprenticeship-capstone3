@@ -10,9 +10,8 @@ import useDeleteNote from '../../utils/hooks/useDeleteNote';
 
 const ArchivePage = () => {
   const { state } = useContext(Context);
-  const notes = JSON.parse(localStorage.getItem('archive')); 
   const [shownNotes, setShownNotes] = useState([]);
-  const { handleDeleteNote } = useDeleteNote(notes);
+  const { handleDeleteNote } = useDeleteNote();
 
   useEffect(() => {
     setShownNotes(state.archive);
@@ -23,9 +22,10 @@ const ArchivePage = () => {
   }, [state.archive]);
 
   useEffect(() => {
-    setShownNotes((current) => current = state.searched)
-    if(state.searched.length === 0)  setShownNotes(state.archive);
-  }, [state.searched]);
+    if(!state.searchText) setShownNotes(state.archive)
+    const searchedNotes = state.archive.filter(n => n.content.includes(state.searchText))
+    setShownNotes(searchedNotes)
+  },[state.searchText]);
 
   return (
     <Layout>
@@ -35,7 +35,12 @@ const ArchivePage = () => {
         {
           shownNotes
             ? shownNotes.map(note => (
-              <Note key={note.id} content={note.content} color={note.color} handleDeleteNote={() => handleDeleteNote(note.id)} />
+              <Note
+                key={note.id}
+                content={note.content}
+                color={note.color}
+                handleDeleteNote={() => handleDeleteNote(note.id)}
+              />
             ))
             : 'Note not found'
         }

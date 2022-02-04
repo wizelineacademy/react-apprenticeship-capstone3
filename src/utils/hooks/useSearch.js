@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { Context, actions } from '../../context';
 
 const useSearch = () => {
-    const archiveData = JSON.parse(localStorage.getItem('archive')) 
-    const [searchedNotes, setSearchedNotes] = useState([]);
-
-    const handleSearch = (e) => {
+    const { state, dispatch } = useContext(Context);
+    const handleSearchedText = (e) => {
         e.preventDefault();
         const { value } = e.target;
-        const filterData = archiveData.filter(search => search.content.includes(value) && search);
-        setSearchedNotes(filterData);
-};
+        const filterData = state.archive.filter(search => search.content.includes(value) && search);
+        dispatch(actions.changeSearchText(value));
+        return filterData;
+    };
 
-    return { handleSearch, searchedNotes, archiveData };
+    return { handleSearchedText };
 
 }
 
