@@ -12,16 +12,20 @@ const HomePage = () => {
   const { state } = useContext(Context);
   const [notes, setNotes] = useState([]);
   const { handleDeleteNote } = useDeleteNote();
+  var archive = localStorage.getItem('archive');
  
   useEffect(() => {
-    setNotes((current) => current = state.archive)
-  },[state.archive]);
-
+    setNotes(state.archive)
+  },[]);
   useEffect(() => {
     if(!state.searchText) setNotes(state.archive)
     const searchedNotes = state.archive.filter(n => n.content.includes(state.searchText))
     setNotes(searchedNotes)
   },[state.searchText]);
+
+  useEffect(() => {
+    setNotes(state.archive)
+  },[archive]);
 
   return (
     <Layout>

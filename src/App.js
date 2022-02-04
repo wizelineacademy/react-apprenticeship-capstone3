@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Provider } from './context';
 import HomePage from './pages/Home/Home';
-import NotFoundPage from './pages/NotFound/NotFound';
+import NotFoundPage from './pages/NotFound/Notfound';
 import ArchivePage from './pages/Archive/Archive';
 import LoginPage from './pages/Login/Login';
 import { ThemeProvider } from 'styled-components';

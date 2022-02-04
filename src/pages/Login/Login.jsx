@@ -7,6 +7,7 @@ import { auth } from '../../firebase-config';
 const LoginPage = () => {
   const [ createUser, setCreateUser ] = useState(false);
   const [ isUser, setIsUser ] = useState(true);
+  const [ error, setError ] = useState(true);
   const history = useHistory();
   const [user, setUser] = useState({})
   const [registerData, setRegisterData] = useState({
@@ -42,6 +43,7 @@ const LoginPage = () => {
       history.push('/');
     } catch(error) {
       console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -53,6 +55,7 @@ const LoginPage = () => {
       history.push('/');
     } catch(error) {
       console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -65,12 +68,18 @@ const LoginPage = () => {
             <Input type='text' placeholder='write a email' onChange={(e) => getRegisterInformation(e, 'email')}/>
             <Input type='password' placeholder='create a password' onChange={(e) => getRegisterInformation(e, 'password')}/>
             <Button type='button' onClick={handleRegister}>Create user</Button>
+            {
+              error ? <p>{error}</p> : null
+            }
           </Form>
          ) : (
           <Form>
             <Title>log in</Title>
             <Input type='text' placeholder='enter your email' onChange={(e) => getRegisterInformation(e, 'email')}/>
             <Input type='password' placeholder='enter your password' onChange={(e) => getRegisterInformation(e, 'password')}/>
+            {
+              error ? <p>{error}</p> : null
+            }
             <Button type='button' onClick={handleLogIn}>log in</Button>
             <Button type='button' onClick={handleTYpeofForm}>CREATE USER</Button>
           </Form>
